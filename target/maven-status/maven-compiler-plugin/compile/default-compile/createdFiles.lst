@@ -1,0 +1,4 @@
+com\kafka\springBootKafka\config\KafkaConfiguration.class
+com\kafka\springBootKafka\model\Payload.class
+com\kafka\springBootKafka\listener\KafkaConsumer.class
+com\kafka\springBootKafka\SpringBootKafkaApplication.class
