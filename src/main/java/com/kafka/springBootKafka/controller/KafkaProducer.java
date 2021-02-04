@@ -1,28 +1,20 @@
 package com.kafka.springBootKafka.controller;
 
-import java.net.URI;
-import java.util.Arrays;
-
+import com.kafka.springBootKafka.service.KafkaUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.MediaType;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kafka.springBootKafka.model.Payload;
 
 @RestController
-@RequestMapping("kafka")
+@RequestMapping("/")
 public class KafkaProducer {
 
 	@Autowired
@@ -31,13 +23,16 @@ public class KafkaProducer {
 	@Autowired
 	private KafkaTemplate<String, Payload> kafkaPayloadTemplate;
 
+	@Autowired
+	private KafkaUserDetailsService userDetails;
+
 	private static final String MSG_TOPIC = "kafkatopic";
 
 	private static final String PAYLOAD_TOPIC = "kafkatopicjson";
 
 	private static final ObjectMapper mapper = new ObjectMapper();
 
-	@PostMapping("messages/{message}")
+	@PostMapping("kafka/messages/{message}")
 	public String writeMessage(@PathVariable("message") final String message) {
 
 		try {
@@ -49,7 +44,7 @@ public class KafkaProducer {
 		return "Published message successfully!!";
 	}
 
-	@PostMapping("payloads")
+	@PostMapping("kafka/payloads")
 	public String writePayload(@RequestBody final String message) {
 
 		Payload payload = null;
@@ -62,8 +57,12 @@ public class KafkaProducer {
 		}
 		return "Published payload successfully!!";
 	}
-	
-	
+
+	@GetMapping("kafka/{hello}")
+	public String hello() {
+		return "Hello You!!";
+	}
+
 	/*
 	 * @Autowired RestTemplate restTemplate;
 	 * 

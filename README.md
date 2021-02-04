@@ -49,3 +49,5 @@ http://localhost:8081/kafka/payloads/
     "value": "Hello message",
     "message": "This is testing"
 }
+## Build Steps
+docker build -t target/springboot-kafka-0.0:V1.0.0 .
