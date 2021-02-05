@@ -17,5 +17,3 @@ COPY target/springBootKafka-0.0.1-SNAPSHOT.jar springBootKafka.jar
 
 ENV JAVA_HOME=/opt/java/openjdk \
     PATH="/opt/java/openjdk/bin:$PATH"
-
-CMD ["jshell"]
